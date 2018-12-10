@@ -7,8 +7,7 @@ replies = []
 
 class Users():
     counter = 1
-
-    def __init__(self, username, password, isAdmin, isModerator):
+    def __init__(self, username, password):
         self.id = Users.counter
         self.createdAt = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         self.username = username
@@ -20,35 +19,33 @@ class Users():
     def user_signup(self):
         user= {}
         user['id']=self.id
-        user['name']=self.username
+        user['username']=self.username
         user['password']=self.password
         Users.counter +=1
 
-    def check_user(self, username):
-        for user in users:
-            if user[username]:
-                return user
-            else:
-                return None
-        
-            
-class Comments(Users, author):
-     count = 1
-     def __init__(self,comment):
+        users.append(user)
+
+        return 'user created successfully'
+
+               
+class Comments(Users):
+    count = 1
+    def __init__(self,comment,author):
          self.comment = comment
          self.id = Comments.count
+         self.author = author
 
-     def create_comment(self):
-         user = check_user(author)
-         if not user:
-            return 'please login or signup'
-         
+    def create_comment(self):
          comment={}
-         comment['id'] = self.id
+         comment['id'] = Comments.count
          comment['comment'] = self.comment
-         comment['author'] = user['username']
+         comment['author'] = self.author
          Comments.count +=1
-
+         comments.append(comment)
+         
+         comments.append(comment)
+         return 'comment successfully created'
+         
     def log_out_user(self):
         return {"message": "successfully logged out"}
        
