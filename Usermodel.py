@@ -5,7 +5,7 @@ comments = []
 replies = []
 
 
-class Users():
+class Users(comments):
     counter = 1
 
     def __init__(self, username, password, isAdmin, isModerator):
@@ -30,16 +30,20 @@ class Users():
                 return user
             else:
                 return None
-        
-            
-class Comments(Users, author):
+
+
+
+
+class Comments(Users):
+
      count = 1
      def __init__(self,comment):
          self.comment = comment
          self.id = Comments.count
 
-     def create_comment(self):
-         user = check_user(author)
+     def create_comment(self, author):
+
+         user = Users.check_user(author)
          if not user:
             return 'please login or signup'
          
@@ -54,4 +58,17 @@ class Comments(Users, author):
        
     def login(self):
         self.lastloggedIn = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+
+    def edit_comment(self, username):
+        check = self.check_user(username)
+        if not check:
+            return {"msg":"You cannot edit a comment you did not create"}
+        else:
+            for comm in comments:
+                if comm[id]:
+                    comm['comment'] = self.comment
+                else:
+                    return 'No comment with that id'
+
         
