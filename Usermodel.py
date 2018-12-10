@@ -24,6 +24,14 @@ class Users():
         user['password']=self.password
         Users.counter +=1
 
+    def check_user(self, username):
+        for user in users:
+            if user[username]:
+                return user
+            else:
+                return None
+        
+            
 class Comments(Users, author):
      count = 1
      def __init__(self,comment):
