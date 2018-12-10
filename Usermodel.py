@@ -13,6 +13,7 @@ class Users():
         self.password = password
         self.isAdmin = False
         self.isModerator = False
+        self.lastloggedIn = None
 
     def user_signup(self):
         user= {}
@@ -20,3 +21,7 @@ class Users():
         user['name']=self.username
         user['password']=self.password
         Users.counter +=1
+    
+    def login(self):
+        self.lastloggedIn = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        
