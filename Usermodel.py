@@ -21,7 +21,15 @@ class Users():
         user['name']=self.username
         user['password']=self.password
         Users.counter +=1
-    
+
+    def check_user(self, username):
+        for user in users:
+            if user[username]:
+                return user
+            else:
+                return None
+        
+            
     def login(self):
         self.lastloggedIn = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         
