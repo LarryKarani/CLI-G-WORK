@@ -15,6 +15,7 @@ class Users():
         self.password = password
         self.isAdmin = False
         self.isModerator = False
+        self.lastloggedIn = None
 
     def user_signup(self):
         user = {}
@@ -26,3 +27,7 @@ class Users():
     def log_out_user(self):
         user_logout = False
         return {"message": "successfully logged out"}
+       
+    def login(self):
+        self.lastloggedIn = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        
