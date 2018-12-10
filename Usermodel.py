@@ -1,18 +1,21 @@
 from datetime import datetime
+
 users = []
 comments = []
 replies = []
 
+
 class Users():
     counter = 1
-    
-    def __init__(self,username,password,isAdmin,isModerator):
-        self.id = self.counter
+
+    def __init__(self, username, password, isAdmin, isModerator):
+        self.id = Users.counter
         self.createdAt = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         self.username = username
         self.password = password
         self.isAdmin = False
         self.isModerator = False
+        self.lastloggedIn = None
 
     def user_signup(self):
         user= {}
@@ -21,21 +24,26 @@ class Users():
         user['password']=self.password
         Users.counter +=1
 
-class Comments(Users):
+class Comments(Users, author):
      count = 1
-     def __init__(self,comment,author):
+     def __init__(self,comment):
          self.comment = comment
-         self.author = author
-         self.user_id = self.checkuser(author)
+         self.id = Comments.count
 
      def create_comment(self):
+         user = check_user(author)
+         if not user:
+            return 'please login or signup'
+         
          comment={}
          comment['id'] = self.id
-         comment['description'] = self.comment
-         comment['author'] = self.author
-         comment['user_id'] = user_id
+         comment['comment'] = self.comment
+         comment['author'] = user['username']
          Comments.count +=1
-         
 
-
+    def log_out_user(self):
+        return {"message": "successfully logged out"}
+       
+    def login(self):
+        self.lastloggedIn = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         
