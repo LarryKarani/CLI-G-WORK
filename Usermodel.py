@@ -13,3 +13,10 @@ class Users():
         self.password = password
         self.isAdmin = False
         self.isModerator = False
+
+    def user_signup(self):
+        user= {}
+        user['id']=self.id
+        user['name']=self.username
+        user['password']=self.password
+        Users.counter +=1
